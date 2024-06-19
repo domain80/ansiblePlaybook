@@ -14,7 +14,7 @@
         - tmux
         - python-psutil
         - fish
-        - telegram
+        - telegram-desktop
   
 
   - name: copy wallpaper file
