@@ -41,7 +41,7 @@
       key: "/org/gnome/desktop/background/picture-options"
       value: "'zoom'"
 
-  - name: set windows switcher shortcut
+  - name: remove application switcher shortcut
     become_user: domain80
     dconf: 
       key: "/org/gnome/desktop/wm/keybindings/switch-applications"
