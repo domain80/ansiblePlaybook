@@ -12,6 +12,7 @@
         - neovim
         - firefox
         - tmux
+        - python3-psutil
 
   
 
