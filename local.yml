@@ -13,6 +13,8 @@
         - firefox
         - tmux
 
+  
+
   - name: copy wallpaper file
     copy: 
       src: files/wallpaper.jpg
@@ -21,11 +23,13 @@
       group: root
 
   - name: setup wallpaper
+    become_user: domain80
     dconf: 
       key: "/org/gnome/desktop/background/picture-uri"
       value: "'file:///usr/share/backgrounds/ansible-wallpaper.jpg'"
 
   - name: setup wallpaper position
+    become_user: domain80
     dconf: 
       key: "/org/gnome/desktop/background/picture-options"
       value: "'zoom'"
