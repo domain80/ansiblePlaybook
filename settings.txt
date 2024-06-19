@@ -1,0 +1,193 @@
+[org/gnome/Console]
+last-window-maximised=false
+last-window-size=(1037, 549)
+
+[org/gnome/clocks]
+timers=[{'duration': <1800>, 'name': <''>}]
+
+[org/gnome/clocks/state/window]
+maximized=false
+panel-id='timer'
+size=(870, 690)
+
+[org/gnome/control-center]
+last-panel='background'
+window-state=(878, 557, false)
+
+[org/gnome/desktop/app-folders]
+folder-children=['Utilities', 'YaST', 'Pardus']
+
+[org/gnome/desktop/app-folders/folders/Pardus]
+categories=['X-Pardus-Apps']
+name='X-Pardus-Apps.directory'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/Utilities]
+apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.Loupe.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop']
+categories=['X-GNOME-Utilities']
+name='X-GNOME-Utilities.directory'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/YaST]
+categories=['X-SuSE-YaST']
+name='suse-yast.directory'
+translate=true
+
+[org/gnome/desktop/background]
+picture-options='zoom'
+picture-uri='file:///usr/share/backgrounds/gnome/ansible-wallpaper.jpg'
+picture-uri-dark='file:///usr/share/backgrounds/gnome/ansible-wallpaper.jpg'
+primary-color='#3071AE'
+secondary-color='#000000'
+
+[org/gnome/desktop/input-sources]
+sources=[('xkb', 'us')]
+xkb-options=['terminate:ctrl_alt_bksp']
+
+[org/gnome/desktop/interface]
+color-scheme='prefer-dark'
+monospace-font-name='MonoLisa 10'
+
+[org/gnome/desktop/notifications]
+application-children=['firefox', 'gnome-power-panel', 'org-gnome-console', 'kitty', 'org-gnome-nautilus', 'org-gnome-clocks', 'org-gnome-settings']
+
+[org/gnome/desktop/notifications/application/firefox]
+application-id='firefox.desktop'
+
+[org/gnome/desktop/notifications/application/gnome-power-panel]
+application-id='gnome-power-panel.desktop'
+
+[org/gnome/desktop/notifications/application/kitty]
+application-id='kitty.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-clocks]
+application-id='org.gnome.clocks.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-console]
+application-id='org.gnome.Console.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-nautilus]
+application-id='org.gnome.Nautilus.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-settings]
+application-id='org.gnome.Settings.desktop'
+
+[org/gnome/desktop/screensaver]
+color-shading-type='solid'
+picture-options='zoom'
+picture-uri='file:///usr/share/backgrounds/gnome/adwaita-l.jxl'
+primary-color='#3071AE'
+secondary-color='#000000'
+
+[org/gnome/desktop/wm/keybindings]
+close=['<Super>q']
+show-desktop=['<Super>d']
+switch-applications=['<Super>Tab', '<Alt>Tab']
+switch-windows=@as []
+
+[org/gnome/desktop/wm/preferences]
+button-layout='appmenu:minimize,maximize,close'
+
+[org/gnome/epiphany/state]
+is-maximized=false
+window-size=(1024, 736)
+
+[org/gnome/evolution-data-server]
+migrated=true
+
+[org/gnome/font-manager]
+compare-background-color='rgb(255,255,255)'
+compare-foreground-color='rgb(0,0,0)'
+compare-list=@as []
+google-fonts-background-color='rgb(255,255,255)'
+google-fonts-foreground-color='rgb(0,0,0)'
+is-maximized=false
+language-filter-list=@as []
+language-filter-min-coverage=90.0
+preview-page=0
+selected-category='1'
+window-position=(26, 23)
+window-size=(900, 600)
+
+[org/gnome/mutter]
+center-new-windows=true
+
+[org/gnome/nautilus/icon-view]
+default-zoom-level='small'
+
+[org/gnome/nautilus/list-view]
+use-tree-view=true
+
+[org/gnome/nautilus/preferences]
+default-folder-viewer='icon-view'
+migrated-gtk-settings=true
+search-filter-time-type='last_modified'
+
+[org/gnome/nautilus/window-state]
+initial-size=(890, 550)
+
+[org/gnome/nm-applet/eap/ca7bbad7-ba23-4a30-9019-c3c8e98ffac5]
+ignore-ca-cert=false
+ignore-phase2-ca-cert=false
+
+[org/gnome/nm-applet/eap/d196b4b5-bd60-4963-9192-94d3dea92adb]
+ignore-ca-cert=true
+ignore-phase2-ca-cert=false
+
+[org/gnome/portal/filechooser/gnome-background-panel]
+last-folder-path='/home/domain80/dev/ansiblePlaybook/files'
+
+[org/gnome/settings-daemon/plugins/color]
+night-light-enabled=false
+
+[org/gnome/settings-daemon/plugins/media-keys]
+control-center=['<Super>i']
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
+home=['<Super>e']
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Super>Return'
+command='kgx'
+name='open console'
+
+[org/gnome/shell]
+command-history=['kgx']
+favorite-apps=['firefox.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.Music.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'org.gnome.TextEditor.desktop']
+welcome-dialog-last-shown-version='46.2'
+
+[org/gnome/shell/world-clocks]
+locations=@av []
+
+[org/gnome/software]
+check-timestamp=int64 1718711215
+first-run=false
+flatpak-purge-timestamp=int64 1718763812
+
+[org/gnome/tweaks]
+show-extensions-notice=false
+
+[org/gtk/gtk4/settings/file-chooser]
+date-format='regular'
+location-mode='path-bar'
+show-hidden=false
+sidebar-width=140
+sort-column='name'
+sort-directories-first=true
+sort-order='ascending'
+type-format='category'
+view-type='list'
+window-size=(859, 372)
+
+[org/gtk/settings/file-chooser]
+date-format='regular'
+location-mode='path-bar'
+show-hidden=false
+show-size-column=true
+show-type-column=true
+sidebar-width=157
+sort-column='type'
+sort-directories-first=false
+sort-order='ascending'
+type-format='category'
+window-position=(26, 23)
+window-size=(1203, 689)

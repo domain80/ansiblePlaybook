@@ -13,7 +13,8 @@
         - firefox
         - tmux
         - python-psutil
-
+        - fish
+        - telegram
   
 
   - name: copy wallpaper file
