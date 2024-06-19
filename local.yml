@@ -51,5 +51,5 @@
   - name: set windows switcher shortcut
     become_user: domain80
     dconf: 
-      key: "/org/gnome/desktop/wm/keybindings/switch-applications"
+      key: "/org/gnome/desktop/wm/keybindings/switch-windows"
       value: "['<Super>Tab', '<Alt>Tab']"
