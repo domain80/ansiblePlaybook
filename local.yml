@@ -8,4 +8,27 @@
     package: 
       name: 
         - htop
+        - vim
+        - neovim
+        - firefox
         - tmux
+
+  - name: copy wallpaper file
+    copy: 
+      src: files/wallpaper.jpg
+      dest: /usr/share/backgrounds/ansible-wallpaper.png
+      owner: root
+      group: root
+
+  - name: setup wallpaper
+    dconf: 
+      key: "/org/gnome/desktop/background/picture-uri"
+      value: "'file:///usr/share/backgrounds/ansible-wallpaper.png'"
+
+  - name: setup wallpaper position
+    dconf: 
+      key: "/org/gnome/desktop/background/picture-options"
+      value: "'zoom'"
+
+
+
