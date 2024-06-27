@@ -1,67 +1,262 @@
---- 
+---
 - hosts: localhost
   connection: local
   become: true
+  become_method: sudo
 
   tasks:
-  - name: install packages
-    package: 
-      name: 
-        - htop
-        - vim
-        - neovim
-        - firefox
-        - tmux
-        - python-psutil
-        - fish
-        - go
-        - telegram-desktop
-  
-  -name: Copy ssh keys
-    copy: 
-      src: files/wallpaper.jpg
-      dest: /usr/share/backgrounds/gnome/ansible-wallpaper.jpg
-      owner: domain80
-      group: domain80
+    - name: Install packages
+      ansible.builtin.package:
+        name:
+         - android-studio
+         - ansible
+         - baobab
+         - base
+         - base-devel
+         - bluez
+         - bluez-utils
+         - clang
+         - cloudflare-warp-bin
+         - cmake
+         - code
+         - dconf-editor
+         - figma-agent-linux
+         - figma-linux
+         - firefox
+         - fish
+         - fisher
+         - font-manager
+         - github-cli
+         - gnome-tweaks
+         - gofumpt
+         - google-chrome
+         - gopls
+         - gparted
+         - hostapd
+         - htop
+         - iw
+         - kitty
+         - mongodb-compass
+         - neovim
+         - nodejs
+         - npm
+         - net-tools
+         - network-manager-applet
+         - packettracer
+         - paru
+         - paru-debug
+         - pnpm
+         - ripgrep
+         - smartmontools
+         - speedtest-cli
+         - telegram-desktop
+         - tmux
+         - tree
+         - vim
+         - vlc
+         - warp-plus
+         - wget
+         - wireless_tools
+         - yarn
+         - yt-dlp
+         - zip
+        state: present
+
+    - name: copy multiple items
+      copy: 
+        src: "{{ item.src }}" 
+        dest: "{{ item.dest }}"
+        loop:
+          - src: files/ssh/
+            dest: /home/domain80/.ssh
 
 
-  - name: copy wallpaper file
-    copy: 
+    - name: Make fish the default shell
+      become: true 
+      ansible.builtin.user:
+            name: "{{ user }}"
+            shell: /usr/bin/fish
+
+    - name: install oh my fish
+    - command: curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+
+    - name: Install lvim
+      command: LV_BRANCH='release-1.4/neovim-0.9' bash (curl -s "https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh" | psub)
+
+    - name: add local bin to path
+      command: fish_add_path -U ~/.local/bin
+
+
+    - name: Download flutter
+      command: curl -o ~/Downloads/flutter.tar.xz  https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.22.2-stable.tar.xz
+
+    - name: Install flutter
+      command: tar -xf ~/Downloads/flutter.tar.xz -C /usr/bin/
+
+    - name: Add flutter to path
+      command: fish_add_path -U /usr/bin/fluter/bin
+
+    - name: Copy /home/domain80/.tmux.conf
+      copy:
+        dest: /home/domain80/.tmux.conf
+        owner: domain80
+        mode: 33188
+        content: |
+          set -g mouse on
+          unbind r
+          bind r source-file ~/.config/tmux/tmux.conf
+
+          set-option -sa terminal-overrides ",xterm*:Tc"
+
+          # exit server when no sessions are running
+          # set -s exit-empty off 
+
+          # open new windows in new directory
+          bind '"' split-window -c "#{pane_current_path}"
+          bind % split-window -h -c "#{pane_current_path}"
+          bind c new-window -c "#{pane_current_path}"
+
+          # Start counting pane and window number at 1
+          set -g base-index 1
+          setw -g pane-base-index 1
+
+          set -g @plugin 'catppuccin/tmux'
+          set -g status-position top
+
+
+          set -g @plugin 'tmux-plugins/tpm'
+          set -g @plugin 'christoomey/vim-tmux-navigator'
+
+          run "~/.tmux/plugins/tpm/tpm"
+
+    - name: Copy /home/domain80/.config/fish/config.fish
+      copy:
+        dest: /home/domain80/.config/fish/config.fish
+        owner: domain80
+        mode: 33188
+        content: |
+          if status is-interactive
+              # Commands to run in interactive sessions can go here
+          end
+
+          set fish_greeting ""
+
+          set -Ux GOPATH $HOME/go/
+          set -Ux GOBIN $HOME/go/bin
+
+          set -Ux CHROME_EXECUTABLE /usr/bin/google-chrome-stable
+
+
+    - name: Copy /home/domain80/.config/lvim/config.lua
+      copy:
+        dest: /home/domain80/.config/lvim/config.lua
+        owner: domain80
+        mode: 33188
+        content: |
+          -- Read the docs: https://www.lunarvim.org/docs/configuration
+          -- Example configs: https://github.com/LunarVim/starter.lvim
+          -- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
+          -- Forum: https://www.reddit.com/r/lunarvim/
+          -- Discord: https://discord.com/invite/Xb9B4Ny
+
+          vim.opt.cmdheight = 2 -- more space in the neovim command line for displaying messages
+          vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
+          vim.opt.tabstop = 2 -- insert 2 spaces for a tab
+          vim.opt.relativenumber = true -- relative line numbers
+
+
+          lvim.keys.visual_mode["p"] = "P"
+          lvim.keys.insert_mode["jk"] = "<Esc>"
+
+          vim.opt.clipboard="unnamedplus"
+
+
+    - name: Copy /home/domain80/.config/kitty/kitty.conf
+      copy:
+        dest: /home/domain80/.config/kitty/kitty.conf
+        owner: domain80
+        mode: 33188
+        content: |
+
+           font_family      Fira Code
+           bold_font        auto
+           italic_font      auto
+           bold_italic_font auto
+
+
+    
+
+
+    - name: Enable bluetooth.service service
+      service:
+        name: bluetooth.service
+        enabled: yes
+    - name: Enable gdm.service service
+      service:
+        name: gdm.service
+        enabled: yes
+    - name: Enable getty@.service service
+      service:
+        name: getty@.service
+        enabled: yes
+    - name: Enable hostapd.service service
+      service:
+        name: hostapd.service
+        enabled: yes
+    - name: Enable NetworkManager-dispatcher.service service
+      service:
+        name: NetworkManager-dispatcher.service
+        enabled: yes
+    - name: Enable NetworkManager-wait-online.service service
+      service:
+        name: NetworkManager-wait-online.service
+        enabled: yes
+    - name: Enable NetworkManager.service service
+      service:
+        name: NetworkManager.service
+        enabled: yes
+    - name: Enable systemd-timesyncd.service service
+      service:
+        name: systemd-timesyncd.service
+        enabled: yes
+
+
+
+    - name: copy wallpaper file
+      copy: 
       src: files/wallpaper.jpg
       dest: /usr/share/backgrounds/gnome/ansible-wallpaper.jpg
       owner: root
       group: root
 
-  - name: setup wallpaper
-    become_user: domain80
-    dconf: 
+    - name: setup wallpaper
+      become_user: domain80
+      dconf: 
       key: "/org/gnome/desktop/background/picture-uri"
       value: "'file:///usr/share/backgrounds/gnome/ansible-wallpaper.jpg'"
 
-  - name: setup dark mode wallpaper
-    become_user: domain80
-    dconf: 
+    - name: setup dark mode wallpaper
+      become_user: domain80
+      dconf: 
       key: "/org/gnome/desktop/background/picture-uri-dark"
       value: "'file:///usr/share/backgrounds/gnome/ansible-wallpaper.jpg'"
 
-  - name: setup wallpaper position
-    become_user: domain80
-    dconf: 
+    - name: setup wallpaper position
+      become_user: domain80
+      dconf: 
       key: "/org/gnome/desktop/background/picture-options"
       value: "'zoom'"
 
-  - name: remove application switcher shortcut
-    become_user: domain80
-    dconf: 
+    - name: remove application switcher shortcut
+      become_user: domain80
+      dconf: 
       key: "/org/gnome/desktop/wm/keybindings/switch-applications"
       value: "@as []"
 
-
-  - name: set windows switcher shortcut
-    become_user: domain80
-    dconf: 
+    - name: set windows switcher shortcut
+      become_user: domain80
+      dconf: 
       key: "/org/gnome/desktop/wm/keybindings/switch-windows"
       value: "['<Super>Tab', '<Alt>Tab']"
-
 
 
