@@ -14,8 +14,16 @@
         - tmux
         - python-psutil
         - fish
+        - go
         - telegram-desktop
   
+  -name: Copy ssh keys
+    copy: 
+      src: files/wallpaper.jpg
+      dest: /usr/share/backgrounds/gnome/ansible-wallpaper.jpg
+      owner: domain80
+      group: domain80
+
 
   - name: copy wallpaper file
     copy: 
