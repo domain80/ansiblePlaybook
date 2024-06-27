@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
+  vars_files: 
+    ./vars/all.yml
   connection: local
   become: true
   become_method: sudo
@@ -62,19 +64,19 @@
          - zip
         state: present
 
-    - name: copy multiple items
+    - name: copy ssh keys
       copy: 
-        src: "{{ item.src }}" 
-        dest: "{{ item.dest }}"
+        content: "{{ ssh_private_key }}" 
+        dest: /home/domain80/.ssh/id_rsa
         loop:
-          - src: files/ssh/
-            dest: /home/domain80/.ssh
+          - content: "{{ ssh_public_key }}" 
+            dest: /home/domain80/.ssh/id_rsa.pub
 
 
     - name: Make fish the default shell
       become: true 
       ansible.builtin.user:
-            name: "{{ user }}"
+            name: domain80
             shell: /usr/bin/fish
 
     - name: install oh my fish
@@ -224,39 +226,39 @@
 
     - name: copy wallpaper file
       copy: 
-      src: files/wallpaper.jpg
-      dest: /usr/share/backgrounds/gnome/ansible-wallpaper.jpg
-      owner: root
-      group: root
+        src: files/wallpaper.jpg
+        dest: /usr/share/backgrounds/gnome/ansible-wallpaper.jpg
+        owner: root
+        group: root
 
     - name: setup wallpaper
       become_user: domain80
       dconf: 
-      key: "/org/gnome/desktop/background/picture-uri"
-      value: "'file:///usr/share/backgrounds/gnome/ansible-wallpaper.jpg'"
+        key: "/org/gnome/desktop/background/picture-uri"
+        value: "'file:///usr/share/backgrounds/gnome/ansible-wallpaper.jpg'"
 
     - name: setup dark mode wallpaper
       become_user: domain80
       dconf: 
-      key: "/org/gnome/desktop/background/picture-uri-dark"
-      value: "'file:///usr/share/backgrounds/gnome/ansible-wallpaper.jpg'"
+        key: "/org/gnome/desktop/background/picture-uri-dark"
+        value: "'file:///usr/share/backgrounds/gnome/ansible-wallpaper.jpg'"
 
     - name: setup wallpaper position
       become_user: domain80
       dconf: 
-      key: "/org/gnome/desktop/background/picture-options"
-      value: "'zoom'"
+        key: "/org/gnome/desktop/background/picture-options"
+        value: "'zoom'"
 
     - name: remove application switcher shortcut
       become_user: domain80
       dconf: 
-      key: "/org/gnome/desktop/wm/keybindings/switch-applications"
-      value: "@as []"
+        key: "/org/gnome/desktop/wm/keybindings/switch-applications"
+        value: "@as []"
 
     - name: set windows switcher shortcut
       become_user: domain80
       dconf: 
-      key: "/org/gnome/desktop/wm/keybindings/switch-windows"
-      value: "['<Super>Tab', '<Alt>Tab']"
+        key: "/org/gnome/desktop/wm/keybindings/switch-windows"
+        value: "['<Super>Tab', '<Alt>Tab']"
 
 
